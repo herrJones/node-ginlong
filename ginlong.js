@@ -103,9 +103,16 @@ function parseSolarman_1(data) {
     .uint16le('f_ac', {formatter: function(field) { return field / 100; }})
     .uint16le('p_ac', {formatter: function(field) { return field / 10; }})
     .skip(2)
-    .uint16le('E_tod',{formatter: function(field) { return field / 100; }})
+    .uint16le('e_tod',{formatter: function(field) { return field / 100; }})
     .skip(2)
-    .uint32le('E_tot',{formatter: function(field) { return field / 10; }});
+    .uint32le('e_tot',{formatter: function(field) { return field / 10; }})
+    .skip(10)
+    .uint8('p_status')
+    .skip(4)
+    .uint16le('e_prev')
+    .skip(8)
+    .uint16le('p_limit')
+    .uint16le('e_cur',{formatter: function(field) { return field / 1000; }});
 
   let parseUndefined = new parser()
     .string('payload', {encoding: 'hex', length: 30});
@@ -137,10 +144,13 @@ try {
                    + ',iac1=' + lineData.payload.i_ac[0].toFixed(1) + ',iac2=' + lineData.payload.i_ac[1].toFixed(1) + ',iac3=' +lineData.payload.i_ac[2].toFixed(1)
                    + ',vac1=' + lineData.payload.v_ac[0].toFixed(1) + ',vac2=' + lineData.payload.v_ac[1].toFixed(1) + ',vac3=' +lineData.payload.v_ac[2].toFixed(1)
                    + ',fac=' + lineData.payload.f_ac.toFixed(2) + ',pac=' + lineData.payload.p_ac.toFixed(1)
-                   + ',e_today=' + lineData.payload.E_tod.toFixed(1) + ',e_total=' + lineData.payload.E_tot
-                   + ',ppv=' + ((lineData.payload.v_pv[0] * lineData.payload.i_pv[0]) + (lineData.payload.v_pv[1] * lineData.payload.i_pv[1])).toFixed(1);
-        
+                   + ',e_today=' + lineData.payload.e_tod.toFixed(1) + ',e_total=' + lineData.payload.e_tot + ',e_cur=' + lineData.payload.e_cur.toFixed(3)
+                   + ',e_prev=' + lineData.payload.e_prev + ',p_status=' + lineData.payload.p_status;
+     
+    // limit spikes at beginning of the day
+    if (lineData.payload.e_cur.toFixed(3) > 0) {
       sendInfluxUpdate('ginlong_db', influxData);
+    }
    // return lineData;
   }
 }
