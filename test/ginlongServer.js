@@ -25,10 +25,10 @@ var waitForCommand = function () {
       console.log('command: GET SETTINGS');
       let tmpSettings = ginlong.settings;
       console.log('cursettings : ' + JSON.stringify(tmpSettings) + '\n');
-      fs.writeFileSync('./settings.json', tmpSettings);
+      fs.writeFileSync(__dirname + '/srvSettings.json', tmpSettings);
     }else if (answer == "sets") {
       console.log('command: SET SETTINGS\n');
-      let tmpSettings = fs.readFileSync('./settings.json');
+      let tmpSettings = fs.readFileSync(__dirname + '/srvSettings.json');
       console.log('newsettings : ' + JSON.stringify(tmpSettings) + '\n');
       ginlong.settings = tmpSettings;
     } else if (answer == "conn") {
