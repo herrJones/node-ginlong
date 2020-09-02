@@ -2,7 +2,20 @@
   "name": "node-ginlong",
   "version": "0.5.0",
   "description": "NodeJS Ginlong SolarMan implementation",
+  "author": "Jan Van Belle",
+  "license": "GPL-3.0-or-later",
   "main": "lib/ginlong.js",
+  "keywords": [
+    "ginlong",
+    "solar",
+    "solarman",
+    "solis",
+    "protocol",
+    "api"
+  ],
+  "engines": {
+    "node": ">=0.10"
+  },
   "directories": {
     "lib": "lib",
     "test": "test"
@@ -14,18 +27,15 @@
     "type": "git",
     "url": "git+https://github.com/herrJones/node-ginlong.git"
   },
-  "keywords": [
-    "ginlong",
-    "solar",
-    "solarman",
-    "solis",
-    "protocol",
-    "api"
-  ],
-  "author": "Jan Van Belle",
-  "license": "GPL-3.0-or-later",
   "bugs": {
     "url": "https://github.com/herrJones/node-ginlong/issues"
   },
-  "homepage": "https://github.com/herrJones/node-ginlong#readme"
+  "homepage": "https://github.com/herrJones/node-ginlong#readme",
+  "dependencies": {
+    "binary-parser": "^1.6.2",
+    "lokijs": "^1.5.11"
+  },
+  "devDependencies": {
+    "eslint": "^7.5.0"
+  }
 }
