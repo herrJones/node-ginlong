@@ -55,25 +55,27 @@ sqliteDb.serialize(() => {
       ON received(port)`);
 
   sqliteDb.run(`CREATE TABLE IF NOT EXISTS logs (
-      serial  TEXT NOT NULL,
-      time    INTEGER NOT NULL,
-      seen    INTEGER NOT NULL,
-      temp    REAL,
-      vpv1    REAL,
-      vpv2    REAL,
-      ipv1    REAL,
-      ipv2    REAL,
-      iac1    REAL,
-      iac2    REAL,
-      iac3    REAL,
-      vac1    REAL,
-      vac2    REAL,
-      vac3    REAL,
-      fac     REAL,
-      pac     REAL,
-      e_today REAL,
-      e_total REAL
-    )`);
+    serial  TEXT NOT NULL,
+    time    INTEGER NOT NULL,
+    seen    INTEGER NOT NULL,
+    temp    REAL DEFAULT 0.0,
+    vpv1    REAL DEFAULT 0.0,
+    vpv2    REAL DEFAULT 0.0,
+    ipv1    REAL DEFAULT 0.0,
+    ipv2    REAL DEFAULT 0.0,
+    iac1    REAL DEFAULT 0.0,
+    iac2    REAL DEFAULT 0.0,
+    iac3    REAL DEFAULT 0.0,
+    vac1    REAL DEFAULT 0.0,
+    vac2    REAL DEFAULT 0.0,
+    vac3    REAL DEFAULT 0.0,
+    fac     REAL DEFAULT 0.0,
+    pac     REAL DEFAULT 0.0,
+    e_today REAL,
+    e_total INTEGER,
+    e_cur   REAL,
+    e_prev  INTEGER
+  )`);
   sqliteDb.run(`CREATE INDEX IF NOT EXISTS idx_logs_time
     ON logs(time)`);
 

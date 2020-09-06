@@ -1,6 +1,6 @@
 {
   "name": "node-ginlong",
-  "version": "0.5.0",
+  "version": "0.9.0",
   "description": "NodeJS Ginlong SolarMan implementation",
   "author": "Jan Van Belle",
   "license": "GPL-3.0-or-later",
@@ -21,7 +21,8 @@
     "test": "test"
   },
   "scripts": {
-    "test": "test/ginlongServer.js"
+    "test": "test/ginlongServer.js",
+    "convert": "test/convert_db.js"
   },
   "repository": {
     "type": "git",
@@ -33,7 +34,7 @@
   "homepage": "https://github.com/herrJones/node-ginlong#readme",
   "dependencies": {
     "binary-parser": "^1.6.2",
-    "lokijs": "^1.5.11"
+    "sqlite3": "^5.0.0"
   },
   "devDependencies": {
     "eslint": "^7.5.0"
