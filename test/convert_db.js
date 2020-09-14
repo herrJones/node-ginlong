@@ -3,7 +3,7 @@
 const loki = require('lokijs');
 const sqlite3 = require('sqlite3').verbose();
 
-let lokiDb = new loki(__dirname + '/ginlong.json', {
+const lokiDb = new loki(__dirname + '/ginlong.json', {
   autoload: true,
   autoloadCallback : () => {
     const entries = lokiDb.getCollection('inverters');
@@ -26,7 +26,7 @@ let lokiDb = new loki(__dirname + '/ginlong.json', {
     }
   }
 });
-let sqliteDb = new sqlite3.Database(__dirname + '/ginlong.db3', (err) => {
+const sqliteDb = new sqlite3.Database(__dirname + '/ginlong.db3', (err) => {
   if (err) {
     return console.error(err.message);
   }
@@ -84,7 +84,7 @@ sqliteDb.serialize(() => {
 function transfer() {
   let lokiCollect = lokiDb.getCollection('inverters');
   let lokiData = lokiCollect.find();
-//  let invList = lokiData;
+  //  let invList = lokiData;
 
 
   /*
