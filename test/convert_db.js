@@ -130,11 +130,14 @@ function transfer() {
   lokiCollect = lokiDb.getCollection('received');
   lokiData = lokiCollect.find();
   sqliteDb.run('BEGIN TRANSACTION');
-  lokiData.forEach((element) => {
-    sqliteDb.run('INSERT INTO received (seen, time, port, data) VALUES (?, ?, ?, ?)', [0, element.time, element.port, JSON.stringify(element.data)], (err) => {
-      if (err) {
-        console.log('error inserting inverter: ' + err.message);
-      }
+  const recvStmt = sqliteDb.prepare('INSERT INTO received (seen, time, port, data) VALUES (?, ?, ?, ?)');
+  sqliteDb.serialize(() => {
+    lokiData.forEach((element) => {
+      recvStmt.run([0, element.time, element.port, JSON.stringify(element.data)], (err) => {
+        if (err) {
+          console.log('error inserting recvlog: ' + err.message);
+        }
+      });
     });
   });
   sqliteDb.run('COMMIT');

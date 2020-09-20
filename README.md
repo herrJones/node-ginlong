@@ -17,3 +17,17 @@ It is up to the main program to do something with this data.
 * ginlongTest : can send data (from CSV file) as if it were an inverter
 * ginlongServer : demo module for receiving data from an inverter
 * convert_db : convert previous LokiJS database to SQLite
+
+Quick-start
+
+const solarSrv = require('node-ginlong')
+var solarData = new solarSrv();
+solarData.create();
+
+function getData() {
+    const db = solarData.db;
+    // *****
+}
+
+const statistics = await solarData.getStats();
+
