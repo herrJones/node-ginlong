@@ -1,6 +1,6 @@
 {
   "name": "node-ginlong",
-  "version": "0.9.2",
+  "version": "0.9.3",
   "description": "NodeJS Ginlong SolarMan implementation",
   "author": "Jan Van Belle",
   "license": "GPL-3.0-or-later",
